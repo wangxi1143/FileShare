@@ -5,6 +5,7 @@ import main.java.com.fileshare.wx.util.LogUtil;
 
 import javax.swing.*;
 import java.io.IOException;
+import java.util.Map;
 
 public class MainUI extends javax.swing.JFrame  {
     private JTextArea logArea;
@@ -15,8 +16,8 @@ public class MainUI extends javax.swing.JFrame  {
     private FileServer fileServer;
     private boolean serverRunning = false;
 
-    public MainUI() {
-        setTitle("LocalNASServer");
+    public MainUI(Map<String, Object> args) {
+        setTitle("FileShareServer");
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(1000,700);
         setLocationRelativeTo(null);
@@ -31,7 +32,7 @@ public class MainUI extends javax.swing.JFrame  {
         });
         
         setVisible(true);
-        LogUtil.info("=== LocalNASServer 启动 ===");
+        LogUtil.info("=== FileShareServer 启动 ===");
         LogUtil.info("日志系统已初始化");
         LogUtil.config("UI 组件加载完成");
         
