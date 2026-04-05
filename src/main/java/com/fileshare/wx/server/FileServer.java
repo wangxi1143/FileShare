@@ -8,6 +8,7 @@ import main.java.com.fileshare.wx.util.LogUtil;
 
 import java.io.*;
 import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
@@ -60,43 +61,11 @@ public class FileServer {
         }
         
         private void listFiles(HttpExchange exchange) throws IOException {
-            StringBuilder html = new StringBuilder();
-            html.append("<!DOCTYPE html>\n")
-                .append("<html><head>\n")
-                .append("<meta charset='UTF-8'>\n")
-                .append("<title>FileShare - 文件列表</title>\n")
-                .append("<script>\n")
-                .append("function deleteFile(encodedFileName, fileName) {\n")
-                .append("  if (confirm('确定要删除文件 \"' + fileName + '\"？')) {\n")
-                .append("    window.location.href = '/delete?file=' + encodedFileName;\n")
-                .append("  }\n")
-                .append("}\n")
-                .append("</script>\n")
-                .append("<style>\n")
-                .append("body { font-family: Arial, sans-serif; margin: 20px; }\n")
-                .append("h1 { color: #333; }\n")
-                .append(".upload-form { margin: 20px 0; padding: 20px; background: #f5f5f5; border-radius: 5px; }\n")
-                .append("table { width: 100%; border-collapse: collapse; margin-top: 20px; }\n")
-                .append("th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }\n")
-                .append("th { background-color: #4CAF50; color: white; }\n")
-                .append("tr:hover { background-color: #f5f5f5; }\n")
-                .append("a { color: #2196F3; text-decoration: none; }\n")
-                .append("a:hover { text-decoration: underline; }\n")
-                .append(".download-btn { background-color: #4CAF50; color: white; padding: 5px 10px; border-radius: 3px; }\n")
-                .append("</style>\n")
-                .append("</head><body>\n")
-                .append("<h1>📁 LocalNAS 文件共享</h1>\n")
-                .append("<div class='upload-form'>\n")
-                .append("<h3>上传文件</h3>\n")
-                .append("<form action='/upload' method='post' enctype='multipart/form-data'>\n")
-                .append("<input type='file' name='file' id='file' required>\n")
-                .append("<input type='submit' value='上传' style='margin-left: 10px; padding: 5px 15px; background-color: #4CAF50; color: white; border: none; border-radius: 3px; cursor: pointer;'>\n")
-                .append("</form>\n")
-                .append("</div>\n")
-                .append("<h3>文件列表</h3>\n")
-                .append("<table>\n")
-                .append("<tr><th>文件名</th><th>大小</th><th>操作</th></tr>\n");
+            // 读取 HTML 模板
+            String htmlTemplate = loadHtmlTemplate();
             
+            // 生成文件列表 HTML
+            StringBuilder fileListHtml = new StringBuilder();
             File shareDir = new File(SHARE_DIR);
             if (shareDir.exists() && shareDir.isDirectory()) {
                 File[] files = shareDir.listFiles();
@@ -105,7 +74,7 @@ public class FileServer {
                         if (!file.isHidden()) {
                             String size = formatFileSize(file.length());
                             String encodedFileName = java.net.URLEncoder.encode(file.getName(), "UTF-8");
-                            html.append("<tr>")
+                            fileListHtml.append("<tr>")
                                 .append("<td>").append(escapeHtml(file.getName())).append("</td>")
                                 .append("<td>").append(size).append("</td>")
                                 .append("<td>")
@@ -118,10 +87,25 @@ public class FileServer {
                 }
             }
             
-            html.append("</table>\n")
-                .append("</body></html>");
+            // 替换占位符
+            String html = htmlTemplate.replace("{{FILE_LIST}}", fileListHtml.toString());
             
-            sendResponse(exchange, 200, html.toString(), "text/html; charset=UTF-8");
+            sendResponse(exchange, 200, html, "text/html; charset=UTF-8");
+        }
+        
+        private String loadHtmlTemplate() throws IOException {
+            try (InputStream is = getClass().getClassLoader().getResourceAsStream("index.html");
+                 BufferedReader reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
+                StringBuilder sb = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line).append("\n");
+                }
+                return sb.toString();
+            } catch (Exception e) {
+                LogUtil.info("加载 HTML 模板失败：" + e.getMessage());
+                throw new IOException("Failed to load HTML template", e);
+            }
         }
         
         private void downloadFile(HttpExchange exchange, String path) throws IOException {
