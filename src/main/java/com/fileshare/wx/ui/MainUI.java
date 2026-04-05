@@ -1,7 +1,7 @@
-package main.java.com.localnas.wx.ui;
+package main.java.com.fileshare.wx.ui;
 
-import main.java.com.localnas.wx.server.FileServer;
-import main.java.com.localnas.wx.util.LogUtil;
+import main.java.com.fileshare.wx.server.FileServer;
+import main.java.com.fileshare.wx.util.LogUtil;
 
 import javax.swing.*;
 import java.io.IOException;

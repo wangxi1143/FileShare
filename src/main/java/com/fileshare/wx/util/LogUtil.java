@@ -1,4 +1,4 @@
-package main.java.com.localnas.wx.util;
+package main.java.com.fileshare.wx.util;
 
 import javax.swing.*;
 import java.io.IOException;

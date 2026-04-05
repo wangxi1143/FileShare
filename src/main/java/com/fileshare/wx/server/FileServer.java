@@ -1,24 +1,22 @@
-package main.java.com.localnas.wx.server;
+package main.java.com.fileshare.wx.server;
 
 import com.sun.net.httpserver.HttpServer;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpExchange;
-import main.java.com.localnas.wx.init.FileInit;
-import main.java.com.localnas.wx.util.LogUtil;
+import main.java.com.fileshare.wx.init.FileInit;
+import main.java.com.fileshare.wx.util.LogUtil;
 
 import java.io.*;
 import java.net.InetSocketAddress;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Map;
 
 public class FileServer {
-    private static final int PORT = 8080;
+    private static int PORT = 8080;
     private static final String SHARE_DIR = FileInit.ROOT_PATH + FileInit.FILE_SEPARATOR + "share";
     private HttpServer server;
+
+
     
     public void start() throws IOException {
         server = HttpServer.create(new InetSocketAddress(PORT), 0);
@@ -66,7 +64,7 @@ public class FileServer {
             html.append("<!DOCTYPE html>\n")
                 .append("<html><head>\n")
                 .append("<meta charset='UTF-8'>\n")
-                .append("<title>LocalNAS - 文件列表</title>\n")
+                .append("<title>FileShare - 文件列表</title>\n")
                 .append("<script>\n")
                 .append("function deleteFile(encodedFileName, fileName) {\n")
                 .append("  if (confirm('确定要删除文件 \"' + fileName + '\"？')) {\n")

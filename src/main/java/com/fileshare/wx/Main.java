@@ -1,17 +1,21 @@
-package main.java.com.localnas.wx;
+package main.java.com.fileshare.wx;
 
-import main.java.com.localnas.wx.init.FileInit;
-import main.java.com.localnas.wx.ui.MainUI;
-import main.java.com.localnas.wx.util.LogUtil;
+import main.java.com.fileshare.wx.init.FileInit;
+import main.java.com.fileshare.wx.ui.MainUI;
+import main.java.com.fileshare.wx.util.ArgsParser;
+import main.java.com.fileshare.wx.util.LogUtil;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
         LogUtil.info("应用程序启动");
         LogUtil.config("正在初始化系统组件...");
+
+        Map<String, Object> arg=ArgsParser.argsParser(args);
         
         FileInit.systemInit();
         

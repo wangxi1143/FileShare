@@ -1,7 +1,7 @@
-package main.java.com.localnas.wx.init;
+package main.java.com.fileshare.wx.init;
 
-import main.java.com.localnas.wx.util.LogUtil;
-import main.java.com.localnas.wx.util.FileUtil;
+import main.java.com.fileshare.wx.util.LogUtil;
+import main.java.com.fileshare.wx.util.FileUtil;
 
 import java.io.File;
 import java.nio.file.FileSystems;
