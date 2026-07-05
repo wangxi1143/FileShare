@@ -31,4 +31,5 @@ bin/
 
 ### Project clashes ###
 /share/
-/log/
+/logs/
+/target/
