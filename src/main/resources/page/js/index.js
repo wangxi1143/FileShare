@@ -1,17 +1,14 @@
-
-const fileList = [
-    { name: "a.txt", size: "13MB" },
-    { name: "a.jar", size: "13MB" },
-    { name: "b.pdf", size: "1MB" }
-];
-function getDataSet() {
-
-    return {
-        total: 3,
-        files: fileList
-    };
+function getFileList() {
+    fetch('/api/list?path=/')
+            .then(response => response.text())
+            .then(data => {
+                alert(data);
+            })
+            .catch(error => {
+                alert('请求失败：' + error);
+            });
+            fileList = JSON.parse(data).list;
 }
-
 const tbody = document.querySelector('#fileTable tbody');
 
 function renderTable() {
@@ -48,8 +45,7 @@ document.getElementById('uploadBox').onclick = function() {
 
 renderTable();
 
-//获取文件列表
-// GET  /api/list?path=/          ← 获取文件列表
+
 
 //删除文件
 // DELETE /api/file?path=/test.txt ← 删除文件

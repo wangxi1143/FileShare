@@ -4,9 +4,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.*;
-import java.net.*;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     public final static Logger log = LogManager.getLogger(Main.class);
@@ -24,39 +26,71 @@ public class Main {
                  PrintWriter pw = new PrintWriter(socket.getOutputStream())) {
 
                 // 读取并打印所有请求头
-                List<String> list = new LinkedList(){};
+                List<String> list = new LinkedList<>();
                 String line;
-                System.out.println("=== New Request ===");
                 while ((line = br.readLine()) != null && !line.isEmpty()) {
                     list.add(line);
                 }
-                for (int i = 0; i < list.size(); i++) {
-                    System.out.println(list.get(i));
-                }
-                System.out.println("=== End of Request ===\n");
 
                 //解析请求头
                 System.out.println(list.getFirst());
                 String[] parts = list.getFirst().split(" ");
-                if (parts.length >= 3) {
-                    String method = parts[0];
-                    String path = parts[1];
-                    String protocol = parts[2];
-                    System.out.println("Method: " + method);
-                    System.out.println("Path: " + path);
-                    System.out.println("Protocol: " + protocol);
-                }
-                String file =" ";
+
+
+
+                String sharePath = "share";
+                String pageFilePath = " ";
                 String contentType = "text/html; charset=utf-8";  // 默认内容类型
-                switch (parts[1]){
-                    case "/" : file = "page/index.html"; break;
-                    case "/page/css/index.css": file = "page/css/index.css"; contentType = "text/css; charset=utf-8"; break;
-                    case "/page/js/index.js": file = "page/js/index.js"; contentType = "application/javascript; charset=utf-8"; break;
-                    default: file = "page/404.html"; break;
+                switch (parts[1]) {
+                    case "/":
+                        pageFilePath = "page/index.html";
+                        break;
+                    case "/css/index.css":
+                        pageFilePath = "page/css/index.css";
+                        contentType = "text/css; " + "charset=utf-8";
+                        break;
+                    case "/js/index.js":
+                        pageFilePath = "page/js/index.js";
+                        contentType = "application/javascript; " + "charset=utf-8";
+                        break;
+                    case "/api/list?path=/" :
+                        File file = new File(sharePath);
+                        if (!file.isDirectory()) {
+                            break;
+                        }
+                        Map<String, Object> outerMap = new java.util.HashMap<>();
+                        List<Map<String, String>> fileMapList = new java.util.ArrayList<>();
+                        for (int i = file.listFiles().length - 1; i >= 0; i--) {
+                            Map<String,String> fileMap = new java.util.HashMap<>();
+                            fileMap.put(file.listFiles()[i].getName(), file.listFiles()[i].isDirectory() ? "folder" : "file");
+                            fileMapList.add(fileMap);
+                        }
+                        outerMap.put("list", fileMapList);
+                        outerMap.put("total", fileMapList.size());
+                        String json = new com.fasterxml.jackson.databind.ObjectMapper().writeValueAsString(outerMap);
+                        StringBuilder response = new StringBuilder();
+                        response.append(json);
+                        contentType = "application/json; " + "charset=utf-8";
+                        // 构造HTTP响应
+                        String httpResponse = "HTTP/1.1 200 OK\r\n" +
+                                "Content-Type: " + contentType + "\r\n" +
+                                "Content-Length: " + response.toString().getBytes().length + "\r\n" +
+                                "Connection: close\r\n" +
+                                "\r\n" +
+                                response;
+
+                        // 发送响应
+                        pw.write(httpResponse);
+                        pw.flush();
+                        continue;
+                    default:
+                        pageFilePath = "page/404.html";
+                        break;
                 }
 
+
                 // 读取 资源
-                InputStream inputStream = Main.class.getClassLoader().getResourceAsStream(file);
+                InputStream inputStream = Main.class.getClassLoader().getResourceAsStream(pageFilePath);
                 StringBuilder response = new StringBuilder();
                 try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(inputStream))) {
                     String fileLine;

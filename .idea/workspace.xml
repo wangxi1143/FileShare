@@ -9,14 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0beaa957-9796-4b9c-85bf-2c9fe74b4540" name="更改" comment="clean tree">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fileshare/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fileshare/file/FileInit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/404.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/log4j2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    <list default="true" id="0beaa957-9796-4b9c-85bf-2c9fe74b4540" name="更改" comment="feat(server): 实现服务器功能&#10;&#10;-基本实现浏览器和程序的通信">
+      <change afterPath="$PROJECT_DIR$/.idea/git_toolbox_prj.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fileshare/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fileshare/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/404.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/page/js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/page/js/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,39 +99,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Maven.FileShare [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.FileShare [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.FileShare [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.FileShare [org.apache.maven.plugins:maven-compiler-plugin:3.13.0:compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.FileShare [test].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;ToolWindow.Build.ShowToolbar&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/wangxi/workspace&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;应用程序.Main (1).executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.Main.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.com.fileshare.wx.Main.executor&quot;: &quot;Run&quot;,
-    &quot;应用程序.main.java.com.fileshare.wx.Main.executor&quot;: &quot;Run&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Maven.FileShare [clean].executor": "Run",
+    "Maven.FileShare [compile].executor": "Run",
+    "Maven.FileShare [install].executor": "Run",
+    "Maven.FileShare [org.apache.maven.plugins:maven-compiler-plugin:3.13.0:compile].executor": "Run",
+    "Maven.FileShare [test].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ToolWindow.Build.ShowToolbar": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/wangxi/workspace/FileShare/src/test",
+    "project.structure.last.edited": "模块",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "应用程序.Main (1).executor": "Run",
+    "应用程序.Main.executor": "Run",
+    "应用程序.com.fileshare.wx.Main.executor": "Run",
+    "应用程序.main.java.com.fileshare.wx.Main.executor": "Run"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="main.java.com.fileshare.wx.server" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/test" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/share" />
+      <recent name="$PROJECT_DIR$/src/main/resources/page/js" />
+      <recent name="$PROJECT_DIR$/src/main/resources/page" />
+      <recent name="$PROJECT_DIR$/src/main/resources/page/css" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/src" />
-      <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.fileshare.server" />
@@ -197,7 +202,31 @@
       <option name="project" value="LOCAL" />
       <updated>1782005833158</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat(server): 实现文件共享服务器功能&#10;&#10;- 添加主服务器类实现HTTP请求处理和响应&#10;- 集成前端界面包括HTML、CSS和JavaScript文件&#10;- 实现文件上传、下载和管理功能&#10;- 添加日志记录配置使用Log4j2框架&#10;- 配置Maven依赖和项目构建设置&#10;- 添加文件初始化和目录创建功能&#10;- 更新.gitignore配置忽略日志和目标目录">
+      <option name="closed" value="true" />
+      <created>1783252541279</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1783252541279</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat(server): 实现服务器功能&#10;&#10;-基本实现浏览器和程序的通信">
+      <option name="closed" value="true" />
+      <created>1783305739267</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1783305739269</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat(server): 实现服务器功能&#10;&#10;-基本实现浏览器和程序的通信">
+      <option name="closed" value="true" />
+      <created>1783305772710</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1783305772710</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -231,7 +260,9 @@
     <MESSAGE value="chore:对服务端ui界面进行优化&#10;&#10;-新添加no-gui模式" />
     <MESSAGE value="Add README for FileShare file sharing server&#10;&#10;Added detailed README for FileShare project, including features, usage, configuration, and FAQs." />
     <MESSAGE value="clean tree" />
-    <option name="LAST_COMMIT_MESSAGE" value="clean tree" />
+    <MESSAGE value="feat(server): 实现文件共享服务器功能&#10;&#10;- 添加主服务器类实现HTTP请求处理和响应&#10;- 集成前端界面包括HTML、CSS和JavaScript文件&#10;- 实现文件上传、下载和管理功能&#10;- 添加日志记录配置使用Log4j2框架&#10;- 配置Maven依赖和项目构建设置&#10;- 添加文件初始化和目录创建功能&#10;- 更新.gitignore配置忽略日志和目标目录" />
+    <MESSAGE value="feat(server): 实现服务器功能&#10;&#10;-基本实现浏览器和程序的通信" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(server): 实现服务器功能&#10;&#10;-基本实现浏览器和程序的通信" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
